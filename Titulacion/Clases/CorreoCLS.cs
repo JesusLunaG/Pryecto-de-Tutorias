@@ -11,8 +11,8 @@ namespace Titulacion.Clases
         private string destinatario;
         private string asunto;
         private string mensaje;
-        private string remitente_Email = "tutoriaexpress77@gmail.com";
-        private string remitente_Pass = "Prueba123";
+        private string remitente_Email = "TutorExpressRFM13@gmail.com";
+        private string remitente_Pass = "RicardoFloresMagon1";
 
         public string Generar_Contraseña()
         {
