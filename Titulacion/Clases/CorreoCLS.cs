@@ -11,7 +11,7 @@ namespace Titulacion.Clases
         private string destinatario;
         private string asunto;
         private string mensaje;
-        private string remitente_Email = "TutorExpressRFM13@gmail.com";
+        private string remitente_Email = "tutoexpressrfm13@outlook.com";
         private string remitente_Pass = "RicardoFloresMagon1";
 
         public string Generar_Contraseña()
@@ -59,7 +59,7 @@ namespace Titulacion.Clases
             {
                 Mensaje(contraseña);
 
-                SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
+                SmtpClient client = new SmtpClient("smtp.office365.com", 587);
 
                 client.Credentials = new NetworkCredential(remitente_Email, remitente_Pass);
                 client.EnableSsl = true;
