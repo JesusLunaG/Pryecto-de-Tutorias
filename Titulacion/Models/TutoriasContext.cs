@@ -29,7 +29,7 @@ namespace Titulacion.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Data Source=Asura;Initial Catalog=Tutorias;Integrated Security=True");
+                optionsBuilder.UseSqlServer("Server=tcp:tutoriasexpress.database.windows.net,1433;Initial Catalog=TutoriasExpress;Persist Security Info=False;User ID=administrador;Password=Tutorias1.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
             }
         }
 
