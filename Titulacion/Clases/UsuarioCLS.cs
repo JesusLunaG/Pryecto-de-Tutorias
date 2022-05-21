@@ -90,16 +90,23 @@ namespace Titulacion.Clases
                         }
                         catch (Exception)
                         {
-                            getAlumno.Correo = correo;
-                            id.Visibilidad = true;
-
                             CorreoCLS enviar = new CorreoCLS(correo);
-                            string contraseña = enviar.Generar_Contraseña();
 
-                            id.Pass = General.cifrarDatos(contraseña);
+                            if (enviar.smtpCorreo()!= "Hubó un error al intentar mandar el correo")
+                            {
+                                getAlumno.Correo = correo;
+                                id.Visibilidad = true;
 
-                            db.SaveChanges();
-                            return enviar.smtpCorreo(contraseña);
+
+                                string contraseña = enviar.Generar_Contraseña();
+
+                                id.Pass = General.cifrarDatos(contraseña);
+
+                                db.SaveChanges();
+
+                                return "Correo enviado con éxito, revisa tu bandeja de entrada";
+                            }
+                            return "Hubó un error al intentar mandar el correo, intentalo más tarde";
                         }
                     }
                 }

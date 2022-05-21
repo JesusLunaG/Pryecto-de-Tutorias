@@ -30,7 +30,7 @@ namespace Titulacion.Clases
         {
             this.destinatario = destinatario;
             this.asunto = "Registro completado";
-            this.mensaje = "Has completado tu registro con exito por favor logueate con la siguiente contraseña, no olvides cambiarla una vez tengas acceso \nContraseña: ";
+            this.mensaje = "Has completado tu registro con éxito por favor logueate con la siguiente contraseña, no olvides cambiarla una vez tengas acceso \nContraseña: ";
         }
 
         private void Mensaje(string contraseña)
@@ -48,7 +48,7 @@ namespace Titulacion.Clases
             msg.To.Add(new MailAddress(destinatario));
             msg.Subject = asunto;
             msg.SubjectEncoding = Encoding.UTF8;
-            msg.Body = "Tu contraseña ha sido Actualizada con Exito :3";
+            msg.Body = "Tu contraseña ha sido Actualizada con Exito ";
             msg.BodyEncoding = Encoding.UTF8;
             msg.From = new MailAddress(remitente_Email);
             msg.IsBodyHtml = false;
@@ -72,7 +72,7 @@ namespace Titulacion.Clases
             catch (Exception)
             {
 
-                return "Hubo un erro al intentar mandar el mensaje";
+                return "Hubó un error al intentar mandar el mensaje";
             }
         }
         public string smtpCorreo()
@@ -94,7 +94,7 @@ namespace Titulacion.Clases
             catch (Exception)
             {
 
-                return "Hubo un erro al intentar mandar el mensaje";
+                return "Hubó un error al intentar mandar el mensaje";
             }
         }
     }
