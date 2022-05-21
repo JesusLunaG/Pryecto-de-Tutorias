@@ -28,7 +28,7 @@ namespace Titulacion
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(option => {
                     option.LoginPath = "/Home/Login";
-                    option.ExpireTimeSpan = TimeSpan.FromMinutes(30);                    
+                    option.ExpireTimeSpan = TimeSpan.FromMinutes(5);                    
                     option.AccessDeniedPath = "/Home/Denegado";
                 });
             services.AddAuthorization();
