@@ -20,8 +20,8 @@
     <tbody >
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
+            <tr> @*Fila*@
+                <td> @*Columnas*@
                     @item.IdAlumno
                 </td>
                 <td>
@@ -131,7 +131,7 @@
     }
     function Completado(){
         document.getElementById("frmEditar").submit();        
-        swal("Buen trabajo", "Has hecho click en el boton!", "Exitoso");
+        swal("Buen trabajo", "Has hecho click en el boton!", "success");
     }
     function ModalEliminar(IdAlumno){
         swal({

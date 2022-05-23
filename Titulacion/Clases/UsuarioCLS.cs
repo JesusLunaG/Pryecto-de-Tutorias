@@ -92,13 +92,12 @@ namespace Titulacion.Clases
                         {
                             CorreoCLS enviar = new CorreoCLS(correo);
 
-                            if (enviar.smtpCorreo()!= "Hubó un error al intentar mandar el correo")
+                            string contraseña = enviar.Generar_Contraseña();
+
+                            if (enviar.smtpCorreo(contraseña) != "1")
                             {
                                 getAlumno.Correo = correo;
-                                id.Visibilidad = true;
-
-
-                                string contraseña = enviar.Generar_Contraseña();
+                                id.Visibilidad = true;                                
 
                                 id.Pass = General.cifrarDatos(contraseña);
 
@@ -126,6 +125,9 @@ namespace Titulacion.Clases
                 //Para despues crearse un registro de la tabla inscripcion con los datos del alumno y profesor
                 //En el registro de inscripcion se generara un folio Aleatorio al momento
 
+                // Hola como estas
+                //{'HOla','como','estas'}  
+
                 try
                 {
                     Inscripcion inscrip = new Inscripcion();
@@ -133,14 +135,19 @@ namespace Titulacion.Clases
                     var alm = db.Alumno.Where(x => x.IdUsuario == us.IdUsuario).First();
                     string[] aux = nomProfe.Split(' ');
                     var prof = db.Profesor.Where(x => x.Nombre == aux[0]).First();
+
                     prof.HorasTutoria--;
                     alm.Tutoria = true;
+
                     inscrip.IdProfesor = prof.IdProfesor;
                     inscrip.IdAlumno = alm.IdAlumno;
                     inscrip.Fecha = DateTime.Now.Date;
                     inscrip.Folio = General.Folio(alm);
+
                     db.Inscripcion.Add(inscrip);
+
                     db.SaveChanges();
+
                     return true;
                 }
                 catch (Exception)

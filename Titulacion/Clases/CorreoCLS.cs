@@ -11,8 +11,8 @@ namespace Titulacion.Clases
         private string destinatario;
         private string asunto;
         private string mensaje;
-        private string remitente_Email = "tutoexpressrfm13@outlook.com";
-        private string remitente_Pass = "RicardoFloresMagon1";
+        private string remitente_Email = "tutoriaexpress77@gmail.com";
+        private string remitente_Pass = "Prueba123";
 
         public string Generar_Contraseña()
         {
@@ -48,7 +48,7 @@ namespace Titulacion.Clases
             msg.To.Add(new MailAddress(destinatario));
             msg.Subject = asunto;
             msg.SubjectEncoding = Encoding.UTF8;
-            msg.Body = "Tu contraseña ha sido Actualizada con Exito ";
+            msg.Body = "Tu Correo ha sido Actualizada con Exito ";
             msg.BodyEncoding = Encoding.UTF8;
             msg.From = new MailAddress(remitente_Email);
             msg.IsBodyHtml = false;
@@ -59,7 +59,7 @@ namespace Titulacion.Clases
             {
                 Mensaje(contraseña);
 
-                SmtpClient client = new SmtpClient("smtp.office365.com", 587);
+                SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
 
                 client.Credentials = new NetworkCredential(remitente_Email, remitente_Pass);
                 client.EnableSsl = true;
@@ -72,7 +72,7 @@ namespace Titulacion.Clases
             catch (Exception)
             {
 
-                return "Hubó un error al intentar mandar el mensaje";
+                return "1";
             }
         }
         public string smtpCorreo()
@@ -94,7 +94,7 @@ namespace Titulacion.Clases
             catch (Exception)
             {
 
-                return "Hubó un error al intentar mandar el mensaje";
+                return "1";
             }
         }
     }

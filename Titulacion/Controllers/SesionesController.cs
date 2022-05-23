@@ -19,7 +19,7 @@ namespace Titulacion.Controllers
         General generic = new General();
         
         [HttpGet]
-        [Authorize(Roles = "Alumno")]
+        [Authorize(Roles = "Alumno")]        
         public IActionResult InicioAlumno()
         {
             List<Profesor> listaProfesor = obj.listaProfesores();
@@ -40,9 +40,8 @@ namespace Titulacion.Controllers
         }
         [Authorize(Roles = "Alumno")]
         public FileResult Comprobante()
-        {
-            ComprobanteCLS compro = new ComprobanteCLS();
-            FileStream documento =  compro.GenerarComprobante();
+        {            
+            FileStream documento = new ComprobanteCLS().GenerarComprobante();
             return File(documento, "application/pdf");
         }
         [HttpGet]

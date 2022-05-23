@@ -30,11 +30,13 @@ namespace Titulacion.Clases
 
             //Creamos un nuevo documento y lo definimos como PDF
             FileStream stream = new FileStream(generic.Boleta + ".pdf", FileMode.Create);
-            Document pdfDoc = new Document(PageSize.A5.Rotate(), 25, 25, 30, 30);            
+            Document pdfDoc = new Document(PageSize.A5.Rotate(), 25, 25, 30, 30);
+            
             PdfWriter writer = PdfWriter.GetInstance(pdfDoc, stream);
 
             Font letra = new Font(Font.FontFamily.COURIER, 12, Font.NORMAL, BaseColor.BLACK);
             Font letra2 = new Font(Font.FontFamily.COURIER, 12, Font.BOLD, BaseColor.BLACK);
+
             pdfDoc.Open();
 
 
