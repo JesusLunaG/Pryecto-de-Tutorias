@@ -30,7 +30,10 @@ namespace Titulacion.Clases
                     }
                     if (Convert.ToInt32(user.Tipo) == 1)
                     {
+                        var prof = db.Profesor.Where(x => x.IdUsuario == user.IdUsuario).First();
+                        Nombre = prof.Nombre + " " + prof.ApellidoPat + " " + prof.ApellidoMat;
                         generic.Boleta = user.User;
+
                     }
                     if (Convert.ToInt32(user.Tipo) == 2)
                     {
@@ -178,11 +181,22 @@ namespace Titulacion.Clases
                 var Profesor = db.Profesor.Where(x => x.IdUsuario == idProfesor).First().IdProfesor;
                 List<Inscripcion> inscri = db.Inscripcion.Where(x => x.IdProfesor == Profesor).ToList();
                 List<AlumnoCLS> alumnosRegistrados = new List<AlumnoCLS>();
-                Alumno alumno = new Alumno();
+                Alumno alumno = new Alumno();                
                 for (int i = 0; i < inscri.Count; i++)
-                {
+                {                    
                     var alm = db.Alumno.Where(x => x.IdAlumno == inscri[i].IdAlumno).First();
-                    alumnosRegistrados[i].IdAlumno = alm.IdAlumno;                    
+                    var user = db.Usuarios.Where(x => x.IdUsuario == alm.IdUsuario).First();
+                    alumnosRegistrados.Add(new AlumnoCLS
+                    {
+                        IdAlumno = alm.IdAlumno,
+                        Boleta = user.User,
+                        Nombre = alm.Nombre,
+                        ApellidoPat = alm.ApellidoPat,
+                        ApellidoMat = alm.ApellidoMat,
+                        Correo = alm.Correo,
+                        Grupo = alm.Grupo,
+                        Tutoria = alm.Tutoria
+                    });                
                 }
                 return alumnosRegistrados;
             }

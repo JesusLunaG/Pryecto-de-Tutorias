@@ -21,7 +21,6 @@ namespace Titulacion.Clases
                                         Grupo = alm.Grupo,
                                         Tutoria = alm.Tutoria
                                     }).ToList();
-
                 List<Alumno> listaAlumnosVisibles = new List<Alumno>();
                 for (int i = 0; i < listaAlumnos.Count; i++)
                 {
