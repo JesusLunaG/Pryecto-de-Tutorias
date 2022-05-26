@@ -114,7 +114,7 @@ namespace Titulacion.Clases
                             db.Alumno.Add(setAlumno);
 
                             db.SaveChanges();
-                            return "El usuario fue registrar con éxito";
+                            return "El usuario fue registrado con éxito";
                         }
                         else
                         {

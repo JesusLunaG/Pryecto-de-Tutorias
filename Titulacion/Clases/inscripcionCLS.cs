@@ -8,5 +8,6 @@ namespace Titulacion.Clases
         public string Alumno { get; set; }
         public DateTime Fecha { get; set; }
         public string Folio { get; set; }
+        public string Ciclo { get; set; }
     }
 }

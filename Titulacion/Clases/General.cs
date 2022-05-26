@@ -34,5 +34,19 @@ namespace Titulacion.Clases
             folio += Convert.ToChar(rd.Next(97, 122));
             return folio;
         }
+        public static string getCiclo() {
+            var año = DateTime.Now.Year.ToString();
+            int mes = DateTime.Now.Month;
+            if (mes < 6)
+            {
+                mes = 2;
+            }
+            else
+            {
+                mes = 1;
+            }
+            var ciclo = año + "-" + mes.ToString();
+            return ciclo;
+        }
     }
 }

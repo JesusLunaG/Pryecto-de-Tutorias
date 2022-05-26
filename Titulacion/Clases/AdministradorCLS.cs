@@ -161,15 +161,18 @@ namespace Titulacion.Clases
             for (int i = 0; i < auxIncrip.Count; i++)
                 {
                     inscripcionCLS inscrip = new inscripcionCLS();
-                    
-                    inscrip.Profesor = db.Profesor.Where(x => x.IdProfesor == auxIncrip[i].IdProfesor).First().ApellidoPat;
-                    inscrip.Profesor += " " + db.Profesor.Where(x => x.IdProfesor == auxIncrip[i].IdProfesor).First().ApellidoMat;
-                    inscrip.Profesor += " " + db.Profesor.Where(x => x.IdProfesor == auxIncrip[i].IdProfesor).First().Nombre;                    
-                    inscrip.Alumno = db.Alumno.Where(x => x.IdAlumno == auxIncrip[i].IdAlumno).First().ApellidoPat;
-                    inscrip.Alumno += " " + db.Alumno.Where(x => x.IdAlumno == auxIncrip[i].IdAlumno).First().ApellidoMat;
-                    inscrip.Alumno += " " + db.Alumno.Where(x => x.IdAlumno == auxIncrip[i].IdAlumno).First().Nombre;
+                    var getAlumno = db.Alumno.Where(x => x.IdAlumno == auxIncrip[i].IdAlumno).First();
+                    var getProfesor = db.Profesor.Where(x => x.IdProfesor == auxIncrip[i].IdProfesor).First();
+                    //var getUsuario = db.Usuarios.Where(x => x.IdUsuario == getAlumno.IdUsuario).First().User;
+                    inscrip.Profesor = getProfesor.ApellidoPat;
+                    inscrip.Profesor += " " + getProfesor.ApellidoMat;
+                    inscrip.Profesor += " " + getProfesor.Nombre;                    
+                    inscrip.Alumno = getAlumno.ApellidoPat;
+                    inscrip.Alumno += " " + getAlumno.ApellidoMat;
+                    inscrip.Alumno += " " + getAlumno.Nombre;
                     inscrip.Fecha = auxIncrip[i].Fecha;
                     inscrip.Folio = auxIncrip[i].Folio;
+                    inscrip.Ciclo = General.getCiclo();
                     listaInscripciones.Add(inscrip);                    
                 }
                 return listaInscripciones;
