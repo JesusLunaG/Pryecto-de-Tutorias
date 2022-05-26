@@ -44,7 +44,7 @@ namespace Titulacion.Controllers
         public IActionResult AgregarProfesor(Profesor prof, string User)
         {
             obj.AgregarProfesor(prof, User);
-            return RedirectToAction("Profesor");
+            return RedirectToAction("Profesores");
         }
         [HttpPost]
         public IActionResult EliminarProfesor(string idProfesor)
