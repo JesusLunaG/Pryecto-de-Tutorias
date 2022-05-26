@@ -20,6 +20,11 @@ namespace Titulacion.Controllers
             return View(obj.MostrarALumnos());
         }
         [HttpPost]
+        public IActionResult AgregarAlumno(Alumno alumno, string User) {
+            obj.AgregarAlumno(alumno, User);
+            return RedirectToAction("Alumno");
+        }
+        [HttpPost]
         public IActionResult EliminarAlumno(string idAlumno)
         {
             obj.EliminarAlumno(int.Parse(idAlumno));

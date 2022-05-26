@@ -4,8 +4,10 @@ using System.Linq;
 using Titulacion.Models;
 namespace Titulacion.Clases
 {
+    
     public class AdministradorCLS
     {
+        
         public List<Alumno> MostrarALumnos() {
             using (TutoriasContext db = new TutoriasContext())
             {
@@ -30,6 +32,44 @@ namespace Titulacion.Clases
                     }
                 }
                 return listaAlumnosVisibles;
+            }
+        }
+        public bool AgregarAlumno(Alumno alumno, string User) {
+            try
+            {
+                using (TutoriasContext db = new TutoriasContext())
+                {
+                    //................................................
+                    CorreoCLS oCorreo = new CorreoCLS(alumno.Correo);
+                    var contra = oCorreo.Generar_Contraseña();
+                    oCorreo.smtpCorreo(contra);
+                    Usuarios oUsuario = new Usuarios();
+                    oUsuario.User = User;
+                    oUsuario.Pass = General.cifrarDatos(contra);
+                    oUsuario.Tipo = 2;
+                    oUsuario.Visibilidad = true;
+
+                    db.Usuarios.Add(oUsuario);
+                    db.SaveChanges();
+
+                    var getUsuario = db.Usuarios.Where(x => x.User == User).First() ;
+                    Alumno oAlumno = new Alumno();
+                    oAlumno.IdUsuario = getUsuario.IdUsuario;
+                    oAlumno.Nombre = alumno.Nombre.ToUpper();
+                    oAlumno.ApellidoPat = alumno.ApellidoPat.ToUpper();
+                    oAlumno.ApellidoMat = alumno.ApellidoMat.ToUpper();
+                    oAlumno.Correo = alumno.Correo;
+                    oAlumno.Grupo = alumno.Grupo.ToUpper();
+
+                    db.Alumno.Add(oAlumno);
+                    db.SaveChanges();
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+
+                return false;
             }
         }
         public bool ModificarAlumno(Alumno alumno) {
@@ -58,11 +98,24 @@ namespace Titulacion.Clases
             {
                 try
                 {
-                    var getAlumno = db.Alumno.Where(x => x.IdAlumno==idAlumno).First();
-                    var getUsuario = db.Usuarios.Where(x => x.IdUsuario == getAlumno.IdUsuario).First();
-                    db.Remove(getAlumno);
-                    db.Remove(getUsuario);
-                    db.SaveChanges();
+                    try
+                    {
+                        var getAlumno = db.Alumno.Where(x => x.IdAlumno == idAlumno).First();
+                        var getInscripcion = db.Inscripcion.Where(x => x.IdAlumno == getAlumno.IdAlumno).First();
+                        var getUsuario = db.Usuarios.Where(x => x.IdUsuario == getAlumno.IdUsuario).First();
+                        db.Remove(getInscripcion);
+                        db.Remove(getAlumno);
+                        db.Remove(getUsuario);
+                        db.SaveChanges();
+                    }
+                    catch (Exception)
+                    {
+                        var getAlumno = db.Alumno.Where(x => x.IdAlumno == idAlumno).First();
+                        var getUsuario = db.Usuarios.Where(x => x.IdUsuario == getAlumno.IdUsuario).First();
+                        db.Remove(getAlumno);
+                        db.Remove(getUsuario);
+                        db.SaveChanges();
+                    }                                        
                     return true;
                 }
                 catch (Exception)
@@ -178,6 +231,7 @@ namespace Titulacion.Clases
                 return listaInscripciones;
             }            
         }        
+
     }
 }
 
