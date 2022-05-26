@@ -59,11 +59,10 @@ namespace Titulacion.Clases
             {
                 try
                 {
-                    Alumno oAlumno = db.Alumno.Where(x => x.IdAlumno == idAlumno).First();
-                    Usuarios oUsuario = db.Usuarios.Where(x => x.IdUsuario == oAlumno.IdUsuario).First();
-                    oAlumno.Correo = null;
-                    oAlumno.Tutoria = false;
-                    oUsuario.Visibilidad = false;
+                    var getAlumno = db.Alumno.Where(x => x.IdAlumno==idAlumno).First();
+                    var getUsuario = db.Usuarios.Where(x => x.IdUsuario == getAlumno.IdUsuario).First();
+                    db.Remove(getAlumno);
+                    db.Remove(getUsuario);
                     db.SaveChanges();
                     return true;
                 }

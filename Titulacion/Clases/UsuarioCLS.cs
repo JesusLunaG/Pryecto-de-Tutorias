@@ -170,19 +170,19 @@ namespace Titulacion.Clases
                 }
             }
         }
-        public List<Alumno> listaAlumnos()
+        public List<AlumnoCLS> listaAlumnos()
         {
             using (TutoriasContext db = new TutoriasContext())
             {
                 var idProfesor = db.Usuarios.Where(x => x.User == generic.Boleta).First().IdUsuario;
                 var Profesor = db.Profesor.Where(x => x.IdUsuario == idProfesor).First().IdProfesor;
                 List<Inscripcion> inscri = db.Inscripcion.Where(x => x.IdProfesor == Profesor).ToList();
-                List<Alumno> alumnosRegistrados = new List<Alumno>();
+                List<AlumnoCLS> alumnosRegistrados = new List<AlumnoCLS>();
                 Alumno alumno = new Alumno();
                 for (int i = 0; i < inscri.Count; i++)
                 {
                     var alm = db.Alumno.Where(x => x.IdAlumno == inscri[i].IdAlumno).First();
-                    alumnosRegistrados.Add(alm);
+                    alumnosRegistrados[i].IdAlumno = alm.IdAlumno;                    
                 }
                 return alumnosRegistrados;
             }

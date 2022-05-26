@@ -66,7 +66,7 @@ namespace Titulacion.Controllers
         [Authorize(Roles = "Profesor")]
         public IActionResult InicioProfesor() {
             ViewBag.Nombre = obj.Nombre;
-            List<Alumno> alumno = obj.listaAlumnos();            
+            List<AlumnoCLS> alumno = obj.listaAlumnos();            
             return View(alumno);
         }
 
