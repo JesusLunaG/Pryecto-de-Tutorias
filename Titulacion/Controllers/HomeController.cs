@@ -61,19 +61,32 @@ namespace Titulacion.Controllers
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentityProfesor));
                     return RedirectToAction("InicioProfesor", "Sesiones");
                 case 2:
-
                     var claimsAlumno = new List<Claim>
+                        {
+                            new Claim("Usuario", userReci.User),
+                            new Claim("Contraseña", userReci.Pass),
+                            
+                        };
+                    if (!new UsuarioCLS().Tutoria)
                     {
-                        new Claim("Usuario", userReci.User),
-                        new Claim("Contraseña", userReci.Pass),
-                        new Claim(ClaimTypes.Role, "Alumno")
-                    };
+                        claimsAlumno.Add(new Claim(ClaimTypes.Role,"Alumno"));
 
-                    var claimsIdentityAlumno = new ClaimsIdentity(claimsAlumno, CookieAuthenticationDefaults.AuthenticationScheme);
+                        var claimsIdentityAlumno = new ClaimsIdentity(claimsAlumno, CookieAuthenticationDefaults.AuthenticationScheme);
 
-                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentityAlumno));
+                        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentityAlumno));
 
-                    return RedirectToAction("InicioAlumno", "Sesiones");
+                        return RedirectToAction("InicioAlumno", "Sesiones");
+                    }
+                    else
+                    {
+                        claimsAlumno.Add(new Claim(ClaimTypes.Role, "AlumnoTutoria"));
+
+                        var claimsIdentityAlumno = new ClaimsIdentity(claimsAlumno, CookieAuthenticationDefaults.AuthenticationScheme);
+
+                        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentityAlumno));
+
+                        return RedirectToAction("AlumnoTutoria", "Sesiones");
+                    }
                 default:
                     ViewBag.Bool = true;
                     ViewBag.Error = "Tu usuario y/o contraseña son incorrectos";

@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewData["Title"] = "AlumnoTutoria";
+    Layout = "~/Views/Shared/_LayaoutAlumno.cshtml";
+}
+
+<h1>Bienvenido @ViewBag.Nombre</h1>
+
+<div>
+    ¡Felicidades! Tienes una tutoria inscrita
+</div>
+<form  target="_blank" asp-action="comprobante" asp-controller="Sesiones" method="post">
+    <input type="submit" value="Generar comprobante" />
+</form>

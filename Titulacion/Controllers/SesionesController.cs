@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -6,6 +8,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Titulacion.Clases;
 using Titulacion.Models;
@@ -22,21 +25,36 @@ namespace Titulacion.Controllers
         [Authorize(Roles = "Alumno")]        
         public IActionResult InicioAlumno()
         {
-            List<Profesor> listaProfesor = obj.listaProfesores();
-            ViewBag.Tutoria = obj.Tutoria;
+            List<Profesor> listaProfesor = obj.listaProfesores();            
             ViewBag.Nombre = obj.Nombre;
             ViewBag.Boleta = generic.Boleta;
             return View(listaProfesor);
         }
+        [Authorize(Roles = "Alumno")]
         [HttpPost]
-        public IActionResult InicioAlumno(string IdUsuario, string nomProfe)
+        public async Task<IActionResult> InicioAlumno(string IdUsuario, string nomProfe)
         {
-            ViewBag.Tutoria = obj.RegistrarTutor(IdUsuario, nomProfe);
+            if (obj.RegistrarTutor(IdUsuario, nomProfe))
+            {
+                await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+                var claimsAlumno = new List<Claim>();                        
+
+                claimsAlumno.Add(new Claim(ClaimTypes.Role, "AlumnoTutoria"));
+
+                var claimsIdentityAlumno = new ClaimsIdentity(claimsAlumno, CookieAuthenticationDefaults.AuthenticationScheme);
+
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentityAlumno));
+
+                return RedirectToAction("AlumnoTutoria");
+            }
             List<Profesor> listaProfesor = obj.listaProfesores();
             return View(listaProfesor);
-        }        
-        public IActionResult EliminarAlumno(string idAlumno) {
-            return RedirectToAction("InicioAlumno");
+        }
+        [Authorize(Roles = "AlumnoTutoria")]
+        public IActionResult AlumnoTutoria() {
+            ViewBag.Nombre = obj.Nombre;
+            return View();
         }
         [Authorize(Roles = "Alumno")]
         public FileResult Comprobante()
