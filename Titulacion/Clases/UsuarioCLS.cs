@@ -68,46 +68,60 @@ namespace Titulacion.Clases
             }
 
         }
-        public string registro(string boleta, string correo)
+        public string registro(Usuarios usuario, Alumno alumno)
         {
             try
             {
                 using (TutoriasContext db = new TutoriasContext())
                 {
-                    var id = db.Usuarios.Where(x => x.User == boleta).First();
-                    var getAlumno = db.Alumno.Where(x => x.IdUsuario == id.IdUsuario).First();
 
-                    if (getAlumno.Correo != null)
+                    try
                     {
-                        return "Esta boleta ya cuenta con un correo asociado";
+                        var getUsuario = db.Usuarios.Where(x => x.User == usuario.User).First();
+                        
+                        return "Este usuario ya exite, prueba a recuerar tu contraseña";
                     }
-                    else
+                    catch (Exception)
                     {
-                        try
+                        Usuarios setUsuario = new Usuarios();
+
+                        setUsuario.User = usuario.User;
+                        setUsuario.Pass = General.cifrarDatos(usuario.Pass);
+                        setUsuario.Tipo = 2;
+                        setUsuario.Visibilidad = true;
+
+                        db.Usuarios.Add(setUsuario);
+
+                        db.SaveChanges();
+
+                        var getId = db.Usuarios.ToList().LastOrDefault();
+
+                        if (getId != null)
                         {
-                            var getCorreo = db.Alumno.Where(x => x.Correo == correo).First();
-                            return "El correo ya esta asociado a otra boleta, por favor intenta otro";
+                            Alumno setAlumno = new Alumno();
+
+                            setAlumno.Nombre = alumno.Nombre;
+                            setAlumno.ApellidoPat = alumno.ApellidoPat;
+                            setAlumno.ApellidoMat = alumno.ApellidoMat;
+                            setAlumno.Correo = alumno.Correo;
+                            setAlumno.IdUsuario = getId.IdUsuario;
+                            setAlumno.Grupo = alumno.Grupo;
+                            setAlumno.Tutoria = false;
+
+                            db.Alumno.Add(setAlumno);
+
+                            db.SaveChanges();
+                            return "El usuario fue registrar con éxito";
                         }
-                        catch (Exception)
+                        else
                         {
-                            CorreoCLS enviar = new CorreoCLS(correo);
-
-                            string contraseña = enviar.Generar_Contraseña();
-
-                            if (enviar.smtpCorreo(contraseña) != "1")
-                            {
-                                getAlumno.Correo = correo;
-                                id.Visibilidad = true;                                
-
-                                id.Pass = General.cifrarDatos(contraseña);
-
-                                db.SaveChanges();
-
-                                return "Correo enviado con éxito, revisa tu bandeja de entrada";
-                            }
-                            return "Hubó un error al intentar mandar el correo, intentalo más tarde";
+                            db.Remove(usuario);
+                            db.SaveChanges();
+                            return "El usuario no se pudo registrar";
                         }
-                    }
+                        
+                        
+                    }                    
                 }
             }
             catch (Exception)

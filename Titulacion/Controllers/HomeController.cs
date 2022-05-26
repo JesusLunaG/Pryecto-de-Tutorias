@@ -110,11 +110,10 @@ namespace Titulacion.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Register(string IdUsuario, string Correo)
-        {
-            UsuarioCLS user = new UsuarioCLS();
+        public IActionResult Register(Usuarios usuario,Alumno alumno)
+        {            
             ViewBag.Bool = true;
-            ViewBag.TodoFine = user.registro(IdUsuario, Correo);
+            ViewBag.TodoFine = new UsuarioCLS().registro(usuario, alumno);
             return View();
         }
 

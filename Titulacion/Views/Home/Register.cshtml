@@ -56,16 +56,16 @@
     </style>
     <main>
       <section class="vh-100">
-        <div class="container py-5 h-100">
+        <div class="container py-5 h-100" >
           <div
             class="row d-flex justify-content-center align-items-center h-100"
           >
-            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+            <div class="col-12 col-md-12 col-lg-12 col-xl-12 mt-4">
               <div class="card shadow-2-strong" style="border-radius: 1rem">
-                <div class="card-body p-5">
+                <div class="card-body p-4">
                   <div class="text-center">
                     <img
-                      src="~/img/email.png"
+                      src="~/img/add-group.png"
                       alt="Imagen Principal"
                       class="mb-4"
                       width="125px"
@@ -82,25 +82,58 @@
                   <form
                     asp-action="Register" 
                     asp-controller="Home" 
-                    method="post"                                                            
+                    method="post"   
+                    class="row"
                   >
-                    <div class="mb-4">
+@*-----------------------------------------------------------------------------*@
+                    <div class="mb-4 col-md-4">
                       <label
-                        for="lblBoleta"
+                        for="lblUsuario"
                         class="col-form-label col-form-label-lg"
                         >Boleta:</label
                       >
                       <input
                         type="text"
-                        name="IdUsuario"
-                        id="lblBoleta"
+                        name="User"
+                        id="lblUsuario"
                         class="form-control form-control-lg"
                         placeholder="Coloca tú Boleta aquí"
                         required
                       />                      
                     </div>
-
-                    <div class="mb-4">
+@*-----------------------------------------------------------------------------*@
+                    <div class="mb-4 col-md-4">
+                      <label
+                        for="lblPass"
+                        class="col-form-label col-form-label-lg"
+                        >Contraseña:</label
+                      >
+                      <input
+                        type="password"
+                        name="Pass"
+                        id="lblPass"
+                        class="form-control form-control-lg"
+                        placeholder="Coloca tú Contraseña"
+                        required
+                      />                      
+                    </div>
+@*-----------------------------------------------------------------------------*@
+                    <div class="mb-4 col-md-4">
+                      <label
+                        for="lblPass"
+                        class="col-form-label col-form-label-lg"
+                        >Contraseña:</label
+                      >
+                      <input
+                        type="password"                        
+                        id="lblPass2"
+                        class="form-control form-control-lg"
+                        placeholder="Repite tu Contraseña"
+                        required
+                      />                      
+                    </div>
+@*-----------------------------------------------------------------------------*@                    
+                    <div class="mb-4 col-md-4">
                       <label
                         for="lblCorreo"
                         class="col-form-label col-form-label-lg"
@@ -115,13 +148,79 @@
                         required
                       />                      
                     </div>
+
+@*-----------------------------------------------------------------------------*@
+                    <div class="mb-4 col-md-4">
+                      <label
+                        for="lblNombre"
+                        class="col-form-label col-form-label-lg"
+                        >Nombre:</label
+                      >
+                      <input
+                        type="text"
+                        name="Nombre"
+                        id="lblNombre"
+                        placeholder="Coloca tú Nombre aquí"
+                        class="form-control form-control-lg"
+                        required
+                      />                      
+                    </div>
+@*-----------------------------------------------------------------------------*@
+                    <div class="mb-4 col-md-4">
+                      <label
+                        for="lblApellidoPat"
+                        class="col-form-label col-form-label-lg"
+                        >Apellido Paterno:</label
+                      >
+                      <input
+                        type="text"
+                        name="ApellidoPat"
+                        id="lblApellidoPat"
+                        placeholder="Coloca tú Apelido Paterno aquí"
+                        class="form-control form-control-lg"
+                        required
+                      />                      
+                    </div>
+@*-----------------------------------------------------------------------------*@
+                    <div class="mb-4 col-md-6">
+                      <label
+                        for="lblApellidoMat"
+                        class="col-form-label col-form-label-lg"
+                        >Apellido Materno:</label
+                      >
+                      <input
+                        type="text"
+                        name="ApellidoMat"
+                        id="lblApellidoMat"
+                        placeholder="Coloca tú Apelido Materno aquí"
+                        class="form-control form-control-lg"
+                        required
+                      />                      
+                    </div>
+@*-----------------------------------------------------------------------------*@
+                    <div class="mb-4 col-md-6">
+                      <label
+                        for="lblGrupo"
+                        class="col-form-label col-form-label-lg"
+                        >Grupo:</label
+                      >
+                      <input
+                        type="text"
+                        name="Grupo"
+                        id="lblGrupo"
+                        placeholder="Coloca tú Grupo aquí"
+                        class="form-control form-control-lg"
+                        required
+                      />                      
+                    </div>
+@*-----------------------------------------------------------------------------*@
                     <div class="text-center">
                       <div class="mb-4 mt-4">
-                        <a asp-action="Login" asp-controller="home"
+                        <a class="col-form-label-lg" asp-action="Login" asp-controller="home"
                           >Click Aquí para Iniciar Sesión</a>
                       </div>
                       <button
-                        class="btn btn-primary btn-lg btn-block"
+                        class="btn btn-primary btn-lg btn-block form-control"
                         onclick="modal()"
                         type="submit"                        
                       >
