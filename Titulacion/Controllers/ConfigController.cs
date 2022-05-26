@@ -10,7 +10,7 @@ namespace Titulacion.Controllers
         General generic = new General();
         UsuarioCLS user = new UsuarioCLS();
         [HttpGet]
-        [Authorize(Roles = "Alumno")]
+        [Authorize(Roles = "Alumno,AlumnoTutoria")]        
         public IActionResult Alumno()
         {
             ViewBag.Boleta = generic.Boleta;
@@ -21,6 +21,7 @@ namespace Titulacion.Controllers
             return View();
         }
         [HttpPost]
+        [Authorize(Roles = "Alumno,AlumnoTutoria")]
         public IActionResult Alumno(string Boleta, string Pass) {
             ViewBag.Boleta = generic.Boleta;
             ViewBag.Nombre = user.AlumnoConfig()[0];
@@ -31,6 +32,7 @@ namespace Titulacion.Controllers
             return View();
         }
         [HttpPost]
+        [Authorize(Roles = "Alumno,AlumnoTutoria")]
         public IActionResult EmailAlumno(string Boleta, string Correo) {
             ViewBag.Error = user.UpdateEmailAlumno(Boleta, Correo);
             ViewBag.Bool = true;
@@ -45,6 +47,7 @@ namespace Titulacion.Controllers
             return View();
         }
         [HttpPost]
+        [Authorize(Roles = "Profesor")]
         public IActionResult Profesor(string Usuario, string Pass) {
             ViewBag.Info = new UsuarioCLS().ProfeConfig();
             ViewBag.Usuario = generic.Boleta;
@@ -53,6 +56,7 @@ namespace Titulacion.Controllers
             return View();
         }
         [HttpPost]
+        [Authorize(Roles = "Profesor")]
         public IActionResult EmailProfesor(string Usuario, string Correo) {
             ViewBag.Error = user.UpdateEmailProfe(Usuario, Correo);
             ViewBag.Bool = true;

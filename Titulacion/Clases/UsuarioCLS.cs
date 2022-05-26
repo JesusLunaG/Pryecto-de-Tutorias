@@ -56,7 +56,7 @@ namespace Titulacion.Clases
                 var getUser = db.Usuarios.Where(x => x.User == generic.Boleta).First();
                 var getGrupo = db.Alumno.Where(x => x.IdUsuario == getUser.IdUsuario).First().Grupo;
                 var listaProfesor = (from prof in db.Profesor
-                                     where prof.Grupo == getGrupo
+                                     where prof.Grupo == getGrupo && prof.HorasTutoria > 0
                                      select new Profesor
                                      {
                                          Nombre = prof.Nombre,

@@ -55,8 +55,8 @@ namespace Titulacion.Controllers
         public IActionResult AlumnoTutoria() {
             ViewBag.Nombre = obj.Nombre;
             return View();
-        }
-        [Authorize(Roles = "Alumno")]
+        }        
+        [Authorize(Roles = "AlumnoTutoria")]
         public FileResult Comprobante()
         {            
             FileStream documento = new ComprobanteCLS().GenerarComprobante();
