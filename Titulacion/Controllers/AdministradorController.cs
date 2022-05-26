@@ -41,6 +41,12 @@ namespace Titulacion.Controllers
             return View(obj.MostrarProfesor());
         }
         [HttpPost]
+        public IActionResult AgregarProfesor(Profesor prof, string User)
+        {
+            obj.AgregarProfesor(prof, User);
+            return RedirectToAction("Profesor");
+        }
+        [HttpPost]
         public IActionResult EliminarProfesor(string idProfesor)
         {
             obj.EliminarProfesor(int.Parse(idProfesor));
