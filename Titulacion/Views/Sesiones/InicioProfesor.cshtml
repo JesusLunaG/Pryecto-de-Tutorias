@@ -3,7 +3,7 @@
     Layout = "~/Views/Shared/_LayaoutProfesor.cshtml"; 
 }
 
-<h1>¡Bienvenido Profesor!</h1>
+<h1>¡Bienvenido @ViewBag.Nombre!</h1>
 <!--
     Tabla Alumnos
 -->
@@ -16,6 +16,9 @@
             <th>
                 Grupo:
             </th>
+            <th>
+                Boleta:
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -27,6 +30,9 @@
                 </td>
                 <td>
                     @item.Grupo
+                </td>
+                <td>
+                    @item.Boleta
                 </td>
             </tr>
         }

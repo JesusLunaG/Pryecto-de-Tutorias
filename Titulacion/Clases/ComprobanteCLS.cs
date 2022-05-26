@@ -18,9 +18,9 @@ namespace Titulacion.Clases
 
             var alm = db.Alumno.Where(x => x.IdUsuario == us.IdUsuario).First();
 
-            var inscrip = db.Inscripcion.Where(x => x.IdAlumno == alm.IdAlumno).First();
+            var inscrip = db.Inscripcion.Where(x => x.IdAlumno == alm.IdAlumno).ToList();
 
-            var prof = db.Profesor.Where(x => x.IdProfesor == inscrip.IdProfesor).First();
+            var prof = db.Profesor.Where(x => x.IdProfesor == inscrip.Last().IdProfesor).First();
 
             bool comprobar = File.Exists(generic.Boleta + ".pdf");
 
@@ -61,7 +61,7 @@ namespace Titulacion.Clases
             pdfDoc.Add(new Paragraph("Comprobante de inscripción a tutorías individuales", letra2) { Alignment = Element.ALIGN_CENTER });
             pdfDoc.Add(Chunk.NEWLINE);
             pdfDoc.Add(Chunk.NEWLINE);
-            pdfDoc.Add(new Paragraph("Folio: " + inscrip.Folio, letra2) { Alignment = Element.ALIGN_LEFT });
+            pdfDoc.Add(new Paragraph("Folio: " + inscrip.Last().Folio, letra2) { Alignment = Element.ALIGN_LEFT });
             pdfDoc.Add(Chunk.NEWLINE);
             PdfPTable tabl1 = new PdfPTable(2);
             tabl1.WidthPercentage = 100;

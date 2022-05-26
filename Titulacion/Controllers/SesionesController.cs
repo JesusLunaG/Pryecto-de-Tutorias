@@ -47,6 +47,7 @@ namespace Titulacion.Controllers
         [HttpGet]
         [Authorize(Roles = "Profesor")]
         public IActionResult InicioProfesor() {
+            ViewBag.Nombre = obj.Nombre;
             List<Alumno> alumno = obj.listaAlumnos();            
             return View(alumno);
         }
