@@ -21,10 +21,16 @@ namespace Titulacion.Controllers
         {
             _logger = logger;
         }
+        
         [HttpGet]
         public IActionResult Login()
         {
             ViewBag.Bool = false;
+            if (TempData["mensaje"] != null)
+            {
+                ViewBag.Bool = true;
+                ViewBag.Error = TempData["mensaje"].ToString(); 
+            }
             return View();
         }
         [HttpPost]
@@ -93,7 +99,11 @@ namespace Titulacion.Controllers
                     return View();
             }
         }
-
+        [HttpPost]
+        public IActionResult CambiarContraseña(string User, string Pass) {
+            TempData["mensaje"] = new UsuarioCLS().UpdatePassAlumno(User, Pass);
+            return RedirectToAction("Login");
+        }
         [HttpGet]
         public IActionResult Register() {
             ViewBag.Bool = false;

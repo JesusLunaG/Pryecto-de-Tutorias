@@ -6,6 +6,7 @@ namespace Titulacion.Controllers
     {
         public IActionResult Index()
         {
+            TempData["mensaje"] = null;
             return View();
         }
     }
