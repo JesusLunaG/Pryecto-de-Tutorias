@@ -65,6 +65,13 @@
     </tbody>
 </table>
 
+<button 
+data-bs-toggle="modal" 
+data-bs-target="#Agregar"
+class="btn-primary btn">
+    <i class="bi bi-plus-square"></i>
+</button>
+
 <!-- Modal Editar -->
 <div class="modal fade" id="Editar" tabindex="-1" aria-labelledby="Editar" aria-hidden="true">
   <div class="modal-dialog">
@@ -112,12 +119,66 @@
     </div>
   </div>
 </div>
-
+<!-- Modal Agregar -->
+<div class="modal fade" id="Agregar" tabindex="-1" aria-labelledby="Agregar" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="Editarlabel">Agregar información del alumno</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
+      </div>
+        <div class="modal-body">
+            <form asp-action="AgregarProfesor" asp-controller="Administrador" method="post" id="frmAgregar">
+                <div class="form-group">
+                    <label for="User">Numero de empleado: </label>
+                    <input type="text" id="txtBoletaA" name="User" class="form-control" required/>
+                </div>
+                <div class="form-group">                
+                    <label for="Nombre">Nombre: </label>
+                    <input type="text" id="txtNombreA" name="Nombre" class="form-control "style="text-transform:uppercase;"required/>
+                </div>
+                <div class="form-group">
+                    <label for="ApellidoPat">Apellido Paterno: </label>
+                    <input type="text" id="txtApellidoPatA" name="ApellidoPat" class="form-control" style="text-transform:uppercase;" required/>
+                </div>
+                    <div class="form-group">
+                    <label for="ApellidoMat">Apellido Materno: </label>
+                <input type="text" id="txtApellidoMatA" name="ApellidoMat" class="form-control" style="text-transform:uppercase;" required/>
+                </div>
+                <div class="form-group">
+                    <label for="Correo">Correo: </label>
+                    <input type="text" id="txtCorreoA" name="Correo" class="form-control" required/>
+                </div>
+                <div class="form-group">
+                    <label for="Grupo">Grupo: </label>
+                    <input type="text" id="txtGrupoA" name="Grupo" class="form-control" style="text-transform:uppercase;" required/>
+                </div>
+                <div class="form-group">
+                    <label for="HorasTutoria">Horas de tutoria: </label>
+                    <input type="text" id="txtHorasTutoria" name="HorasTutoria" class="form-control" style="text-transform:uppercase;" required/>
+                </div>
+                <div class="form-group">
+                    <label for="HorasTotales">Horas de tutoria: </label>
+                    <input type="text" id="txtHorasTotales" name="HorasTotales" class="form-control" style="text-transform:uppercase;" required/>
+                </div>
+            </form>
+          </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" onclick="Agregar()">Guardar Cambios</button>
+      </div>
+     
+    </div>
+  </div>
+</div>
 <form asp-action="EliminarProfesor" asp-controller="Administrador" method="post" id="frmEliminarProf">
     <input type="hidden" value="" id="txtidProfesor" name="idProfesor"/>
 </form>
 
 <script>
+    function Agregar(){
+        frmAgregar.submit();
+    }
     function Modificar(idAlumnoM,Nombre,ApellidoPat,ApellidoMat,Correo,HorasTutoria,HorasTotales){        
         document.getElementById("idProfesorM").value = idAlumnoM;
         document.getElementById("txtNombre").value = Nombre;

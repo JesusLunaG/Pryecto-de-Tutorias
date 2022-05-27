@@ -7,12 +7,15 @@ namespace Titulacion.Clases
 {
     public class CorreoCLS
     {
+        private static string contra;
         MailMessage msg = new MailMessage();
         private string destinatario;
         private string asunto;
         private string mensaje;
         private string remitente_Email = "tutoriaexpress77@gmail.com";
         private string remitente_Pass = "Prueba123";
+
+        public string Contra { get => contra; set => contra = value; }
 
         public string Generar_Contraseña()
         {
@@ -35,6 +38,7 @@ namespace Titulacion.Clases
 
         private void Mensaje(string contraseña)
         {
+            Contra = contraseña;
             msg.To.Add(new MailAddress(destinatario));
             msg.Subject = asunto;
             msg.SubjectEncoding = Encoding.UTF8;

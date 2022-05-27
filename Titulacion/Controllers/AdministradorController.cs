@@ -20,6 +20,11 @@ namespace Titulacion.Controllers
             return View(obj.MostrarALumnos());
         }
         [HttpPost]
+        public IActionResult AgregarAlumno(Alumno alumno, string User) {
+            obj.AgregarAlumno(alumno, User);
+            return RedirectToAction("Alumno");
+        }
+        [HttpPost]
         public IActionResult EliminarAlumno(string idAlumno)
         {
             obj.EliminarAlumno(int.Parse(idAlumno));
@@ -34,6 +39,12 @@ namespace Titulacion.Controllers
         {
             obj.ModificarProfesor(profesor);
             return View(obj.MostrarProfesor());
+        }
+        [HttpPost]
+        public IActionResult AgregarProfesor(Profesor prof, string User)
+        {
+            obj.AgregarProfesor(prof, User);
+            return RedirectToAction("Profesores");
         }
         [HttpPost]
         public IActionResult EliminarProfesor(string idProfesor)
