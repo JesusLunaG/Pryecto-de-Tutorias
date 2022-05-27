@@ -228,6 +228,7 @@ namespace Titulacion.Clases
                     {
                         Alumno oAlumno = db.Alumno.Where(x => x.IdAlumno == oinscriopcion[i].IdAlumno).First();
                         oAlumno.Tutoria = false;
+                        db.Remove(oinscriopcion);
                     }
 
                     db.Remove(oProfesor);
