@@ -84,6 +84,7 @@
                     asp-controller="Home" 
                     method="post"   
                     class="row"
+                    id="frmregistrar"
                   >
 @*-----------------------------------------------------------------------------*@
                     <div class="mb-4 col-md-4">
@@ -220,7 +221,7 @@
                       </div>
                       <button
                         class="btn btn-primary btn-lg btn-block form-control"
-                        onclick="modal()"
+                        onclick="verificar()"
                         type="submit"                        
                       >
                         Registrarse
@@ -234,6 +235,23 @@
         </div>
       </section>
     </main>
+    <script>
+    funtion verificar()
+    {
+        var contraseñauno= document.getElementById("lblPass").value
+        var contraseñados= document.getElementById("lblPass2").value
+
+        if(contraseñauno==contraseñados)
+        {
+            frmregistrar.submit()
+        }
+        else
+        {
+            swal("Error","Las contraseñas no coinciden", "Warning")
+        }
+    
+    }
+    </script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
