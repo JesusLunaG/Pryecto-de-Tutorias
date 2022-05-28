@@ -23,11 +23,7 @@
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="mynavbar">
-            <ul class="navbar-nav me-auto">
-              <li class="nav-item">
-                <a class="nav-link active" href="javascript:void(0)">Inicio</a>
-              </li>
-            </ul>
+            
             <ul class="navbar-nav d-flex">
               <li class="nav-item">
                 <a class="nav-link" asp-action="Login" asp-controller="Home"
@@ -222,7 +218,7 @@
                       <button
                         class="btn btn-primary btn-lg btn-block form-control"
                         onclick="verificar()"
-                        type="submit"                        
+                        type="button"                        
                       >
                         Registrarse
                       </button>                      
@@ -235,8 +231,9 @@
         </div>
       </section>
     </main>
+     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
-    funtion verificar()
+    function verificar()
     {
         var contraseñauno= document.getElementById("lblPass").value
         var contraseñados= document.getElementById("lblPass2").value
@@ -247,7 +244,13 @@
         }
         else
         {
-            swal("Error","Las contraseñas no coinciden", "Warning")
+            console.log("Funciona")
+            swal({
+                text:"Las contraseñas no coinicen",
+                title:"Error",
+                icon:"warning"
+
+            })
         }
     
     }
@@ -255,6 +258,6 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+   
   </body>
 </html>
